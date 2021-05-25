@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6df1d01e-7d67-4de9-bcbe-b83ce0d1d28a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/other/notes.txt" afterDir="false" />
+    <list default="true" id="cbb5c68e-f0ee-48b2-90a6-07666e0618d2" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/application.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/communications.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/communications.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/generate_keys.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/generate_keys.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +50,9 @@
       <module name="votebloke.application" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/app" />
       <option name="IS_MODULE_SDK" value="true" />

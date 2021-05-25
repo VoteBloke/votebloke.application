@@ -15,6 +15,4 @@ def export_keys_to_file(signing_keys: ecdsa.SigningKey, path: str) -> None:
 
 
 def key_to_string(key: ecdsa.SigningKey) -> str:
-    return base64.b64encode(key.to_string()).decode()
-
-
+    return base64.b64encode(key.to_string()).decode("UTF-8")

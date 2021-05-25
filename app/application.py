@@ -15,6 +15,7 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 loggedIn = False
 
 elections = []
+signing_keys = None
 
 app.layout = html.Div(id='page_content', className='app_body', children=[
 
@@ -153,16 +154,12 @@ def create_new_account(n_clicks) :
         #### Upload the key pair or generate a new one
         '''
 
-    res = create_account()
-
-    if res.status_code != 200:
-        return '''
-        ## Error!
-        '''
+    global signing_keys
+    signing_keys = create_account()
     global loggedIn
     loggedIn = True
     return '''
-    ## Successfully logged in!
+    ## Generate new key pair!
     '''
 
 
