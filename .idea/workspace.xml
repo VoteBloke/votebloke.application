@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6df1d01e-7d67-4de9-bcbe-b83ce0d1d28a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/other/notes.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/application.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/communications.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/communications.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,9 +19,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedIndex" value="1" />
   </component>
   <component name="ProjectId" id="1sNDi0lmyQWA7O0tPJHL2ngAy6N" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -82,7 +76,7 @@
       <workItem from="1621116500105" duration="7014000" />
       <workItem from="1621277463195" duration="12258000" />
       <workItem from="1621344469731" duration="2497000" />
-      <workItem from="1621936745602" duration="2493000" />
+      <workItem from="1621936745602" duration="5518000" />
     </task>
     <servers />
   </component>

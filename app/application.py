@@ -19,40 +19,19 @@ external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css', dbc.themes
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 loggedIn = False
 
-# app.css.config.serve_locally = True
-# app.scripts.config.serve_locally = True
-
-elections = []
-
-
 app.layout = html.Div(id='page_content', className='app_body', children=[
 
     dbc.Row(
         [
-            dbc.Col(html.H1(children='Votebloke')),
-        ]
-    ),
-
-    dbc.Row(
-        [
-            dbc.Col(html.H3(children='A distributed voting platform')),
             dbc.Col(
                 [
-                html.H4(children='Select elections to view the results'),
-                html.Button(
-                    'Load available elections',
-                    id = 'tally_get_elections',
-                    n_clicks = 0
-                ),
-                dcc.Dropdown(
-                    id = 'elections',
-                    options = []
-                )
+                    html.H1(children='Votebloke'),
+                    html.H5(children='A distributed voting platform'),
                 ]
-            )
+            ),
         ]
     ),
-
+    dbc.Row(html.H1()),
     dbc.Row(
         [
             dbc.Col(
@@ -65,30 +44,30 @@ app.layout = html.Div(id='page_content', className='app_body', children=[
                         #### Upload the key pair or generate a new one
                         '''
                     ),
-
                     dbc.Row(),
-
                     html.H3(children='Logging in'),
-
                     dbc.Row(
                         [
-                            dcc.Upload(
-                                id = 'keyPair',
-                                children = html.Div(
-                                    [
-                                        html.A('Select a file')
-                                    ]
+                            dbc.Col(
+                                dcc.Upload(
+                                    id = 'keyPair',
+                                    children = html.Div(
+                                        [
+                                            html.A('Select a file')
+                                        ]
+                                    )
                                 )
                             ),
-                            html.H4(children='OR'),
-                            html.Button(
-                                'Generate a new key pair',
-                                id = 'newPair',
-                                n_clicks = 0
+                            dbc.Col(html.H4(children = 'OR')),
+                            dbc.Col(
+                                html.Button(
+                                    'Generate a new key pair',
+                                    id = 'newPair',
+                                    n_clicks = 0
+                                )
                             )
                         ]
                     ),
-                    
                     html.Div(id='inputBar', children=[
                         html.H2(children='Cast a vote'),
                         html.Button(
@@ -116,7 +95,6 @@ app.layout = html.Div(id='page_content', className='app_body', children=[
                         dcc.Markdown(
                             id = 'cast_status'
                         ),
-
                         dbc.Row(),
                         html.H2(children = 'Create elections'),
                         html.Label('Provide a name'),
@@ -132,15 +110,23 @@ app.layout = html.Div(id='page_content', className='app_body', children=[
                             id = 'create_elections_status'
                         )
                     ]),
-                ],
+                ]
             ),
-            dbc.Col(width=200),
             dbc.Col(
                 [
-                    html.Div(id='resultsArea', children=[
-
+                    html.H4(children='Select elections to view the results'),
+                    html.Button(
+                        'Load available elections',
+                        id = 'tally_get_elections',
+                        n_clicks = 0
+                    ),
+                    dcc.Dropdown(
+                        id = 'elections',
+                        options = []
+                    ),
+                    html.Div(id='election_results', children=[
                         html.H2(children='Results'),
-                        dcc.Graph(id='figureOutput'),
+                        dcc.Graph(id='fig_outp'),
                     ])
                 ]
             )
@@ -148,7 +134,7 @@ app.layout = html.Div(id='page_content', className='app_body', children=[
     )
 ])
 
-#add collback for logging in
+#add callback for logging in
 @app.callback(
     Output(component_id = 'logStatus', component_property = 'children'),
     Input(component_id = 'newPair', component_property = 'n_clicks')
@@ -197,7 +183,7 @@ def create_elections(clicks, name, options) :
         ### Error!
         '''
     return '''
-    ### Elections created succesfully!
+    ### Elections created successfully!
     '''
 
 #create a callback for reading open elections list
@@ -275,10 +261,12 @@ def get_options_vote(elections) :
             res = [{'label': j, 'value': j} for j in i['entryMetadata']['answers']]
 
     return res
-'''
+
 @app.callback(
+    Output(component_id = 'fig_outp', component_property = 'figure'),
+    Input(component_id = 'elections', component_property = 'value')
 )
-def createGraph():
+def create_graph(electionsID):
     # define a layout of returning figure
 
     fig = go.Figure(
@@ -286,23 +274,21 @@ def createGraph():
             template='simple_white',
             xaxis=dict(
                 title=dict(
-                    text='Survival time [years]'
+                    text=''
                 ),
                 range=[0, 5]
             ),
             yaxis=dict(
                 title=dict(
-                    text='Survival probability'
+                    text='# of votes'
                 ),
-                range=[0, 1]
             ),
-            hovermode='x unified',
             height=700
         )
     )
 
     return fig
-'''
+
 
 if __name__ == '__main__':
     app.run_server(debug=True, host='0.0.0.0', port=21317)
