@@ -3,7 +3,7 @@ import json
 import requests
 
 
-def postNewElections(title, options, url = 'http://localhost:8080/v1/blockchain/elections') :
+def post_new_elections(title, options, url ='http://localhost:8080/v1/blockchain/elections') :
     data = {
         'elections' : title,
         'answers' : options
@@ -17,13 +17,13 @@ def postNewElections(title, options, url = 'http://localhost:8080/v1/blockchain/
         headers = {'Content-type': 'application/json'}
     )
 
-def createAccount(url = 'http://localhost:8080/v1/blockchain/accounts/create') :
+def create_account(url ='http://localhost:8080/v1/blockchain/accounts/create') :
     return requests.request(method = 'get', url = url)
 
-def getActiveElections(url = 'http://localhost:8080/v1/blockchain/transactions/elections') :
+def get_active_elections(url ='http://localhost:8080/v1/blockchain/transactions/elections') :
     return requests.request(method = 'get', url = url)
 
-def castVote(elections, option, url = 'http://localhost:8080/v1/blockchain/vote') :
+def cast_vote(elections, option, url ='http://localhost:8080/v1/blockchain/vote') :
     data = {
         'answer': option,
         'electionsTransactionId': elections
