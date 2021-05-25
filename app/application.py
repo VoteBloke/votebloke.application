@@ -1,29 +1,17 @@
 import dash
+import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
-import dash_bootstrap_components as dbc
-import plotly.express as px
-import pandas as pd
 from dash.dependencies import Input, Output, State
+
 from communications import *
-import plotly.graph_objects as go
-import socket
-
-from dash_table import DataTable
-
-# read torch models
-
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css', dbc.themes.GRID]
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 loggedIn = False
 
-# app.css.config.serve_locally = True
-# app.scripts.config.serve_locally = True
-
 elections = []
-
 
 app.layout = html.Div(id='page_content', className='app_body', children=[
 
@@ -38,14 +26,11 @@ app.layout = html.Div(id='page_content', className='app_body', children=[
             dbc.Col(html.H3(children='A distributed voting platform')),
             dbc.Col(
                 [
-                html.H4(children='Select elections to view the results'),
-                dcc.Dropdown(
-                    id = 'elections',
-                    options = [
-                        {'label': 'Test1', 'value': 1},
-                        {'label': 'Test2', 'value': 2}
-                    ]
-                )
+                    html.H4(children='Select elections to view the results'),
+                    dcc.Dropdown(
+                        id='elections',
+                        options=[]
+                    )
                 ]
             )
         ]
@@ -56,8 +41,8 @@ app.layout = html.Div(id='page_content', className='app_body', children=[
             dbc.Col(
                 [
                     dcc.Markdown(
-                        id = 'logStatus',
-                        children =
+                        id='logStatus',
+                        children=
                         '''
                         ### Not logged in!\n
                         #### Upload the key pair or generate a new one
@@ -71,8 +56,8 @@ app.layout = html.Div(id='page_content', className='app_body', children=[
                     dbc.Row(
                         [
                             dcc.Upload(
-                                id = 'keyPair',
-                                children = html.Div(
+                                id='keyPair',
+                                children=html.Div(
                                     [
                                         html.A('Select a file')
                                     ]
@@ -81,18 +66,18 @@ app.layout = html.Div(id='page_content', className='app_body', children=[
                             html.H4(children='OR'),
                             html.Button(
                                 'Generate a new key pair',
-                                id = 'newPair',
-                                n_clicks = 0
+                                id='newPair',
+                                n_clicks=0
                             )
                         ]
                     ),
-                    
+
                     html.Div(id='inputBar', children=[
                         html.H2(children='Cast a vote'),
                         html.Button(
                             'Load available elections',
-                            id = 'voter_get_elections',
-                            n_clicks = 0
+                            id='voter_get_elections',
+                            n_clicks=0
                         ),
 
                         html.Label('Select elections'),
@@ -108,26 +93,26 @@ app.layout = html.Div(id='page_content', className='app_body', children=[
                         ),
                         html.Button(
                             'Vote',
-                            id = 'cast_vote',
-                            n_clicks = 0
+                            id='cast_vote',
+                            n_clicks=0
                         ),
                         dcc.Markdown(
-                            id = 'cast_status'
+                            id='cast_status'
                         ),
 
                         dbc.Row(),
-                        html.H2(children = 'Create elections'),
+                        html.H2(children='Create elections'),
                         html.Label('Provide a name'),
-                        dcc.Input(id = 'electionName', type = 'text', value = 'Election Name'),
+                        dcc.Input(id='electionName', type='text', value='Election Name'),
                         html.Label('Provide options separated by a semicolon(;)'),
-                        dcc.Input(id = 'electionOptions', type = 'text', value = 'Option 1; Option 2; Option 3;...'),
+                        dcc.Input(id='electionOptions', type='text', value='Option 1; Option 2; Option 3;...'),
                         html.Button(
                             'Create elections',
-                            id = 'create_elections',
-                            n_clicks = 0
+                            id='create_elections',
+                            n_clicks=0
                         ),
                         dcc.Markdown(
-                            id = 'create_elections_status'
+                            id='create_elections_status'
                         )
                     ]),
                 ],
@@ -146,13 +131,13 @@ app.layout = html.Div(id='page_content', className='app_body', children=[
     )
 ])
 
-#add collback for logging in
-@app.callback(
-    Output(component_id = 'logStatus', component_property = 'children'),
-    Input(component_id = 'newPair', component_property = 'n_clicks')
-)
-def create_account(n_clicks) :
 
+# add collback for logging in
+@app.callback(
+    Output(component_id='logStatus', component_property='children'),
+    Input(component_id='newPair', component_property='n_clicks')
+)
+def create_account(n_clicks):
     if n_clicks == 0:
         return '''
         ### Not logged in!\n
@@ -161,7 +146,7 @@ def create_account(n_clicks) :
 
     res = createAccount()
 
-    if res.status_code != 200 :
+    if res.status_code != 200:
         return '''
         ## Error!
         '''
@@ -171,26 +156,27 @@ def create_account(n_clicks) :
     ## Successfully logged in!
     '''
 
-#create callback for submitting new elections
+
+# create callback for submitting new elections
 @app.callback(
-    Output(component_id = 'create_elections_status', component_property = 'children'),
-Input(component_id = 'create_elections', component_property = 'n_clicks'),
-    State(component_id = 'electionName', component_property = 'value'),
-    State(component_id = 'electionOptions', component_property = 'value')
+    Output(component_id='create_elections_status', component_property='children'),
+    Input(component_id='create_elections', component_property='n_clicks'),
+    State(component_id='electionName', component_property='value'),
+    State(component_id='electionOptions', component_property='value')
 )
-def create_elections(name, options, clicks) :
+def create_elections(name, options, clicks):
     if clicks == 0:
         return ''''''
 
     global loggedIn
-    if not loggedIn :
+    if not loggedIn:
         return '''
         Please log in first
         '''
     opts = options.split('; ')
     req = postNewElections(name, opts)
 
-    if req.status_code != 200 :
+    if req.status_code != 200:
         return '''
         ### Error!
         '''
@@ -198,15 +184,16 @@ def create_elections(name, options, clicks) :
     ### Elections created succesfully!
     '''
 
-#create a callback for reading open elections list
+
+# create a callback for reading open elections list
 @app.callback(
-    Output(component_id = 'activeElections', component_property = 'options'),
-    Input(component_id = 'voter_get_elections', component_property = 'n_clicks')
+    Output(component_id='activeElections', component_property='options'),
+    Input(component_id='voter_get_elections', component_property='n_clicks')
 )
-def get_elections_vote(n_clicks) :
+def get_elections_vote(n_clicks):
     req = getActiveElections()
 
-    if req.status_code != 200 :
+    if req.status_code != 200:
         return []
 
     opts = json.loads(req.text)
@@ -215,44 +202,47 @@ def get_elections_vote(n_clicks) :
 
     return res
 
-#update voting options based on selected elections
-@app.callback(
-    Output(component_id = 'votingOptions', component_property = 'options'),
-    Input(component_id = 'activeElections', component_property = 'value')
-)
-def get_options_vote(elections) :
 
+# update voting options based on selected elections
+@app.callback(
+    Output(component_id='votingOptions', component_property='options'),
+    Input(component_id='activeElections', component_property='value')
+)
+def get_options_vote(elections):
     req = getActiveElections()
-    if req.status_code != 200 :
+    if req.status_code != 200:
         return []
 
     opts = json.loads(req.text)
 
     res = []
 
-    for i in opts :
-        if i['transactionId'] == elections :
+    for i in opts:
+        if i['transactionId'] == elections:
             res = [{'label': j, 'value': j} for j in i['entryMetadata']['answers']]
 
     return res
 
-#cast a vote
+
+# cast a vote
 @app.callback(
-    Output(component_id = 'cast_status', component_property = 'children'),
-    Input(component_id = 'cast_vote', component_property = 'n_clicks'),
-    State(component_id = 'activeElections', component_property = 'value'),
-    State(component_id = 'votingOptions', component_property = 'value')
+    Output(component_id='cast_status', component_property='children'),
+    Input(component_id='cast_vote', component_property='n_clicks'),
+    State(component_id='activeElections', component_property='value'),
+    State(component_id='votingOptions', component_property='value')
 )
-def vote(clicks, election_id, option) :
+def vote(clicks, election_id, option):
     tmp = castVote(election_id, option)
 
-    if tmp.status_code != 200 :
+    if tmp.status_code != 200:
         return '''
         #### Error!
         '''
     return '''
     #### OK!
     '''
+
+
 '''
 @app.callback(
 )

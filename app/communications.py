@@ -2,7 +2,6 @@ import json
 
 import requests
 
-#important variables
 
 def postNewElections(title, options, url = 'http://localhost:8080/v1/blockchain/elections') :
     data = {
