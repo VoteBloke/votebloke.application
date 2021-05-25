@@ -2,7 +2,7 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 import dash_bootstrap_components as dbc
-import plotly.express as px
+
 import pandas as pd
 from dash.dependencies import Input, Output, State
 from communications import *
@@ -39,12 +39,14 @@ app.layout = html.Div(id='page_content', className='app_body', children=[
             dbc.Col(
                 [
                 html.H4(children='Select elections to view the results'),
+                html.Button(
+                    'Load available elections',
+                    id = 'tally_get_elections',
+                    n_clicks = 0
+                ),
                 dcc.Dropdown(
                     id = 'elections',
-                    options = [
-                        {'label': 'Test1', 'value': 1},
-                        {'label': 'Test2', 'value': 2}
-                    ]
+                    options = []
                 )
                 ]
             )
@@ -151,7 +153,7 @@ app.layout = html.Div(id='page_content', className='app_body', children=[
     Output(component_id = 'logStatus', component_property = 'children'),
     Input(component_id = 'newPair', component_property = 'n_clicks')
 )
-def create_account(n_clicks) :
+def create_new_account(n_clicks) :
 
     if n_clicks == 0:
         return '''
@@ -159,7 +161,7 @@ def create_account(n_clicks) :
         #### Upload the key pair or generate a new one
         '''
 
-    res = createAccount()
+    res = create_account()
 
     if res.status_code != 200 :
         return '''
@@ -178,7 +180,7 @@ Input(component_id = 'create_elections', component_property = 'n_clicks'),
     State(component_id = 'electionName', component_property = 'value'),
     State(component_id = 'electionOptions', component_property = 'value')
 )
-def create_elections(name, options, clicks) :
+def create_elections(clicks, name, options) :
     if clicks == 0:
         return ''''''
 
@@ -188,7 +190,7 @@ def create_elections(name, options, clicks) :
         Please log in first
         '''
     opts = options.split('; ')
-    req = postNewElections(name, opts)
+    req = post_new_elections(name, opts)
 
     if req.status_code != 200 :
         return '''
@@ -204,7 +206,7 @@ def create_elections(name, options, clicks) :
     Input(component_id = 'voter_get_elections', component_property = 'n_clicks')
 )
 def get_elections_vote(n_clicks) :
-    req = getActiveElections()
+    req = get_active_elections()
 
     if req.status_code != 200 :
         return []
@@ -222,7 +224,7 @@ def get_elections_vote(n_clicks) :
 )
 def get_options_vote(elections) :
 
-    req = getActiveElections()
+    req = get_active_elections()
     if req.status_code != 200 :
         return []
 
@@ -244,7 +246,7 @@ def get_options_vote(elections) :
     State(component_id = 'votingOptions', component_property = 'value')
 )
 def vote(clicks, election_id, option) :
-    tmp = castVote(election_id, option)
+    tmp = cast_vote(election_id, option)
 
     if tmp.status_code != 200 :
         return '''
@@ -253,6 +255,26 @@ def vote(clicks, election_id, option) :
     return '''
     #### OK!
     '''
+
+@app.callback(
+    Output(component_id = 'elections', component_property = 'options'),
+    Input(component_id = 'tally_get_elections', component_property = 'value')
+)
+def get_options_vote(elections) :
+
+    req = get_active_elections()
+    if req.status_code != 200 :
+        return []
+
+    opts = json.loads(req.text)
+
+    res = []
+
+    for i in opts :
+        if i['transactionId'] == elections :
+            res = [{'label': j, 'value': j} for j in i['entryMetadata']['answers']]
+
+    return res
 '''
 @app.callback(
 )
