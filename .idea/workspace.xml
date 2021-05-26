@@ -7,9 +7,15 @@
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/votebloke.application.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/votebloke.application.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/app/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/application.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/communications.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/communications.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/generate_keys.py" beforeDir="false" />
+<<<<<<< Updated upstream
+=======
+=======
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,9 +104,20 @@
       <workItem from="1621116500105" duration="7014000" />
       <workItem from="1621277463195" duration="12258000" />
       <workItem from="1621344469731" duration="2497000" />
+<<<<<<< Updated upstream
       <workItem from="1621936745602" duration="2493000" />
       <workItem from="1621965889938" duration="9744000" />
       <workItem from="1621976452255" duration="689000" />
+=======
+<<<<<<< Updated upstream
+      <workItem from="1621936745602" duration="2493000" />
+      <workItem from="1621965889938" duration="9744000" />
+      <workItem from="1621976452255" duration="689000" />
+=======
+      <workItem from="1621936745602" duration="5976000" />
+      <workItem from="1621956763927" duration="308000" />
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>
