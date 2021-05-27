@@ -130,3 +130,6 @@ dmypy.json
 
 #ignore local notes folder
 other/
+
+#ignore IDE configuration
+.idea/

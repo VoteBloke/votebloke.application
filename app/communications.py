@@ -49,12 +49,12 @@ def get_output_transactions(
 
 
 # Post requests
-def post_new_elections(signing_keys: ec.EllipticCurvePrivateKey, question: str, options: list[str],
+def post_new_elections(signing_keys: ec.EllipticCurvePrivateKey, question: str, options: list,
                        url: str = 'http://localhost:8080/v1/blockchain/elections') -> \
         requests.Response:
     data = {'elections': question, 'answers': options}
     data = json.dumps(data)
-
+    print("here")
     response = requests.post(url=url, data=data, headers={'Content-Type': 'application/json',
                                                           'public-key':
                                                               cryptography_wrappers.encode_public_key(

@@ -11,7 +11,22 @@ def generate_keys() -> ec.EllipticCurvePrivateKey:
     return ec.generate_private_key(ec.SECP256R1())
 
 
+def export_private_key(private_key: ec.EllipticCurvePrivateKey) -> bytes:
+
+    serialized_private_key = private_key.private_bytes(
+        encoding=serialization.Encoding.PEM,
+        format=serialization.PrivateFormat.PKCS8,
+        encryption_algorithm=serialization.NoEncryption()
+    )
+
+    return serialized_private_key
+
+def import_private_key(priv_ser: bytes) -> ec.EllipticCurvePrivateKey:
+    return serialization.load_pem_private_key(priv_ser, password = None)
+
+#obsolete
 def export_keys_to_files(private_key: ec.EllipticCurvePrivateKey) -> None:
+
     serialized_private_key = private_key.private_bytes(encoding=serialization.Encoding.PEM,
                                                        format=serialization.PrivateFormat.PKCS8,
                                                        encryption_algorithm=serialization.NoEncryption())

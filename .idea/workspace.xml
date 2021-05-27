@@ -2,14 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cbb5c68e-f0ee-48b2-90a6-07666e0618d2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/cryptography_wrappers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/helper_functions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/votebloke.application.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/votebloke.application.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/application.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/communications.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/communications.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/generate_keys.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cryptography_wrappers.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/cryptography_wrappers.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +36,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectId" id="1sNDi0lmyQWA7O0tPJHL2ngAy6N" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -64,9 +72,6 @@
       <module name="votebloke.application" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/app" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -101,6 +106,7 @@
       <workItem from="1621936745602" duration="2493000" />
       <workItem from="1621965889938" duration="9744000" />
       <workItem from="1621976452255" duration="689000" />
+      <workItem from="1622060819118" duration="14865000" />
     </task>
     <servers />
   </component>
