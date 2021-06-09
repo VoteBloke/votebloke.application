@@ -100,9 +100,9 @@ def cast_vote(signing_keys: ec.EllipticCurvePrivateKey, elections_transaction_id
     return response
 
 
-def tally_elections(signing_keys: ec.EllipticCurvePrivateKey, elections_transactions_id: str,
+def tally_elections(signing_keys: ec.EllipticCurvePrivateKey, elections_transaction_id: str,
                     url: str = 'http://localhost:8080/v1/blockchain/tally'):
-    data = {'electionsTransactionsId': elections_transactions_id}
+    data = {'electionsTransactionId': elections_transaction_id}
     data = json.dumps(data)
     response = requests.post(url=url, data=data, headers={'Accept': 'application/json',
                                                           'Content-Type': 'application/json',
