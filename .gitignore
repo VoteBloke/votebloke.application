@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+#ignore local notes folder
+other/
+
+#ignore IDE configuration
+.idea/
